@@ -8,11 +8,19 @@
             <div class="row">
               <div class="col">
                 <h1 class="text-light text-start px-4">Mi área de trabajo</h1>
-                <h6 class="text-start px-4 text-white-50">Lunes 31 de Enero del 2022</h6>
+                <h6 class="text-start px-4 text-white-50 text-capitalize">{{today}}</h6>
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-5 py-3">
+              <div class="col-lg-5 py-3" v-if="!existMeets">
+                <div>
+                  <a class="p-2 mx-md-4 my-3 bg-2 text-white-50 rounded-3 d-block text-decoration-none pe-auto">
+                    <h6>No hay eventos en lista</h6>
+                    <h6 class="mb-0"> --:-- </h6>
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-5 py-3" v-else>
                 <div v-for="(reunion,i) in reuniones" :key="i">
                   <a class="p-2 mx-md-4 my-3 bg-2 text-white-50 rounded-3 d-block text-decoration-none pe-auto" 
                   :href="reunion.link"
@@ -50,10 +58,15 @@
 </template>
 
 <script>
+import moment from 'moment'
+import Reuniones from '@/db/listMeet.js'
 export default {
   name: 'Home',
   data() {
     return {
+      today: '',
+      existMeets: false,
+      reuniones: [],
       enlaces: [
         {
           name: 'Aula virtual',
@@ -71,30 +84,38 @@ export default {
           faviconLink: 'http://www.google.com/s2/favicons?domain='
         },
       ],
-      reuniones: [
-        {
-          name: 'Planeamiento estrategico',
-          link: '',
-          start: '07:30',
-          end: '10:00',
-          active: true,
-        },
-        {
-          name: 'Ingenieria del software',
-          link: '',
-          start: '10:00',
-          end: '12:30',
-          active: false,
-        },
-        {
-          name: 'Microprocesadores',
-          link: '',
-          start: '12:30',
-          end: '15:00',
-          active: false,
-        },
-      ]
     }
+  },
+  methods: {
+    loadHour(hour){
+      let time = new Date()
+      let objTime = hour.split(':')
+      time.setHours(objTime[0],objTime[1],0)
+      return time
+    },
+    isActiveMeeting(reunion){
+      let start = this.loadHour(reunion.start)
+      let end = this.loadHour(reunion.end)
+      let now = new Date()
+      let flag = moment(now).isBetween(start,end)
+      return flag
+    },
+    currentMeeting(){
+      let time = new Date()
+      let day = Reuniones[time.getDay]
+      this.reuniones = day
+      moment.locale('es')
+      this.today = moment().format('dddd DD [de] MMMM [del] YYYY')
+      this.existMeets = Array.isArray(day)
+      if (this.existMeets) {
+        for (let i = 0; i < day.length; i++) {
+          day[i].active = this.isActiveMeeting(day[i])
+        }
+      }
+    }
+  },
+  created() {
+    this.currentMeeting()
   }
 }
 </script>
