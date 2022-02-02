@@ -4,7 +4,7 @@
       <div class="col px-0 px-md-auto">
         <div class="">
           <!-- <img src="https://bing.ioliu.cn/v1/rand" alt="img random" class="img-fluid"> -->
-          <section class="bg-1 p-4 m-md-4 rounded-3">
+          <section class="bg-1 p-4 m-sm-4 rounded-3">
             <div class="row">
               <div class="col">
                 <h1 class="text-light text-start px-4">Mi área de trabajo</h1>
@@ -43,7 +43,7 @@
                 <div class="row">
                   <div class="col-5 col-sm-2 bg-2 rounded-3 my-1 mx-auto mx-sm-1" v-for="(enlace,i) in enlaces" :key="i">
                     <a class="m-2 d-block text-decoration-none pe-auto" :href="enlace.link">
-                        <img class="img-fluid img-favicon" :src="enlaces[0].faviconLink+enlace.link" alt="hola"/>
+                        <img class="img-fluid img-favicon" :src="enlaces[0].faviconLink+enlace.link" :alt="enlace.name"/>
                         <h6 class="text-light">{{enlace.name}}</h6>
                     </a>
                   </div>

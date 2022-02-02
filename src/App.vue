@@ -31,4 +31,9 @@ body {
   font-family: 'Roboto', sans-serif !important;
   background-color: #000 !important;
 }
+@media (max-width: 575px){
+  body {
+      background: #0E1011 !important;
+  }
+}
 </style>
