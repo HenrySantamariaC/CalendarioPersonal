@@ -102,7 +102,7 @@ export default {
     },
     currentMeeting(){
       let time = new Date()
-      let day = Reuniones[time.getDay]
+      let day = Reuniones[time.getDay()]
       this.reuniones = day
       moment.locale('es')
       this.today = moment().format('dddd DD [de] MMMM [del] YYYY')
