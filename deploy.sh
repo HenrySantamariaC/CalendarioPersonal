@@ -3,7 +3,7 @@
 set -e
 
 git add -A
-git commit -m 'Iniciando repositorio'
+git commit -m $1
 git push -f git@github.com:HenrySantamariaC/CalendarioPersonal.git master
 
 npm run build
