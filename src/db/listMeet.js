@@ -54,7 +54,7 @@ let reuniones = [
             name: 'Ingenieria del software',
             link: 'https://meet.google.com/sxk-bdkg-bmq',
             start: '10:00',
-            end: '01:20',
+            end: '13:20',
             active: false,
         },
         {
