@@ -1,9 +1,10 @@
-#!/usr/bin/env sh
+#!/usr/bin/env sh fwef
 
 set -e
 
 git add -A
-git commit -m $1
+read -p "Mensaje del commit: "
+git commit -m $REPLY
 git push -f git@github.com:HenrySantamariaC/CalendarioPersonal.git master
 
 npm run build
