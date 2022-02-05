@@ -3,8 +3,7 @@
 set -e
 
 git add -A
-read -p "Mensaje del commit: "
-git commit -m $REPLY
+git commit -m $1
 git push -f git@github.com:HenrySantamariaC/CalendarioPersonal.git master
 
 npm run build
